@@ -1,0 +1,11 @@
+[pt-br]
+title = "Site do Richelmy"
+weight = 1
+LanguageName = "pt-br"
+contentDir = "content/brazilian_portuguese"
+
+# [en]
+# title = "Site do Richelmy"
+# weight = 1
+# LanguageName = "EN"
+# contentDir = "content/english"

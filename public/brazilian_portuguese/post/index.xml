@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Site do Richelmy</title>
+    <link>http://localhost:1313/brazilian_portuguese/post/</link>
+    <description>Recent content on Site do Richelmy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 31 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/brazilian_portuguese/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/brazilian_portuguese/post/hello/</link>
+      <pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/brazilian_portuguese/post/hello/</guid>
+      
+        <description>Primeiro post</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Brazilian_portugueses on Site do Richelmy</title>
+    <link>http://localhost:1313/brazilian_portuguese/</link>
+    <description>Recent content in Brazilian_portugueses on Site do Richelmy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 31 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/brazilian_portuguese/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Contact</title>
+      <link>http://localhost:1313/brazilian_portuguese/contact/</link>
+      <pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/brazilian_portuguese/contact/</guid>
+      
+        <description>Página de contatos</description>
+      
+    </item>
+    
+    <item>
+      <title>Sobre</title>
+      <link>http://localhost:1313/brazilian_portuguese/about/</link>
+      <pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/brazilian_portuguese/about/</guid>
+      
+        <description>Hello World</description>
+      
+    </item>
+    
+  </channel>
+</rss>
