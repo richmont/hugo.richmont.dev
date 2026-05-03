@@ -2,17 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Site do Richelmy</title>
-    <link>http://localhost:1313/</link>
+    <link>https://richmont.dev/</link>
     <description>Recent content on Site do Richelmy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 31 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://richmont.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Como utilizar Redis no FLUIG</title>
+      <link>https://richmont.dev/post/redis_fluig/</link>
+      <pubDate>Sun, 03 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://richmont.dev/post/redis_fluig/</guid>
+      
+        <description>Chamar funções do Redis para usar de cache nas suas aplicações FLUIG</description>
+      
+    </item>
+    
+    <item>
+      <title>Instalação de drivers do MariaDB e PostgreSQL no FLUIG</title>
+      <link>https://richmont.dev/post/drivers_fluig/</link>
+      <pubDate>Sun, 03 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>https://richmont.dev/post/drivers_fluig/</guid>
+      
+        <description>Configuração de datasources alternativos para integração</description>
+      
+    </item>
+    
     <item>
       <title>Contact</title>
-      <link>http://localhost:1313/contact/</link>
+      <link>https://richmont.dev/contact/</link>
       <pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/contact/</guid>
+      <guid>https://richmont.dev/contact/</guid>
       
         <description>Página de contatos</description>
       
@@ -20,10 +42,10 @@
     
     <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/post/hello/</link>
+      <link>https://richmont.dev/post/hello/</link>
       <pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/post/hello/</guid>
+      <guid>https://richmont.dev/post/hello/</guid>
       
         <description>Primeiro post</description>
       
@@ -31,10 +53,10 @@
     
     <item>
       <title>Sobre</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://richmont.dev/about/</link>
       <pubDate>Sat, 31 Jan 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://richmont.dev/about/</guid>
       
         <description>Hello World</description>
       

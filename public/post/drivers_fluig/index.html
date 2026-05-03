@@ -1,0 +1,646 @@
+<!doctype html>
+<html
+  dir="ltr"
+  lang="pt-br"
+  data-theme=""
+  
+    class="html theme--light"
+  
+><head>
+  <meta charset="utf-8" /><title>
+    
+      
+        Instalação de drivers do MariaDB e PostgreSQL no FLUIG |
+      Richelmy Monteiro
+
+  </title>
+
+  <meta name="generator" content="Hugo 0.161.1"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Richelmy Monteiro" />
+  <meta
+    name="description"
+    content="Configuração de datasources alternativos para integração"
+  />
+  
+  
+        <link rel="stylesheet" href="/css/anatole.min.d1a2db4db62630dc690a91ef034ed2fbecab93af4a610b9b8966d9f96705289c.css" integrity="sha256-0aLbTbYmMNxpCpHvA07S&#43;&#43;yrk69KYQubiWbZ&#43;WcFKJw=" crossorigin="anonymous" />
+      
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.f8ba48d3fd92c731701d9634494275b2f2bc2ad0bea19b438feb41b25052f83b.css"
+    integrity="sha256-&#43;LpI0/2SxzFwHZY0SUJ1svK8KtC&#43;oZtDj&#43;tBslBS&#43;Ds="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.137b1cf3cea9a8adb7884343a9a5ddddf4280f59153f74dc782fb7f7bf0d0519.css"
+    integrity="sha256-E3sc886pqK23iENDqaXd3fQoD1kVP3TceC&#43;3978NBRk="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.e65dc5b48fb5f39b142360c57c3a215744c94e56c755c929cc3e88fe12aab4d3.css"
+    integrity="sha256-5l3FtI&#43;185sUI2DFfDohV0TJTlbHVckpzD6I/hKqtNM="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.6f4f16d58da1c82c0c3a3436e021a3d39b4742f741192c546e73e947eacfd92f.css"
+    integrity="sha256-b08W1Y2hyCwMOjQ24CGj05tHQvdBGSxUbnPpR&#43;rP2S8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.e10425ad768bc98ff1fb272a0ac8420f9d1ba22f0612c08ff1010c95080ffe7e.css"
+    integrity="sha256-4QQlrXaLyY/x&#43;ycqCshCD50boi8GEsCP8QEMlQgP/n4="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://richmont.dev/post/drivers_fluig/" />
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.8724ddf9268dee451060f191961647573c7f592fbccc6d858746236b3f915813.js"
+      integrity="sha256-hyTd&#43;SaN7kUQYPGRlhZHVzx/WS&#43;8zG2Fh0Yjaz&#43;RWBM="
+      crossorigin="anonymous"
+    ></script>
+  
+
+  
+
+  
+
+  
+
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Instalação de drivers do MariaDB e PostgreSQL no FLUIG">
+  <meta name="twitter:description" content="Configuração de datasources alternativos para integração">
+
+
+
+  
+  <meta property="og:url" content="https://richmont.dev/post/drivers_fluig/">
+  <meta property="og:site_name" content="Site do Richelmy">
+  <meta property="og:title" content="Instalação de drivers do MariaDB e PostgreSQL no FLUIG">
+  <meta property="og:description" content="Configuração de datasources alternativos para integração">
+  <meta property="og:locale" content="pt_br">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-05-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-05-03T00:00:00+00:00">
+
+
+
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Instalação de drivers do MariaDB e PostgreSQL no FLUIG",
+        "headline": "Instalação de drivers do MariaDB e PostgreSQL no FLUIG",
+        "alternativeHeadline": "",
+        "description": "
+      Configuração de datasources alternativos para integração
+
+
+    ",
+        "license": "",
+        
+        "inLanguage": "pt-br",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/richmont.dev\/post\/drivers_fluig\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "dateCreated": "2026-05-03T00:00:00.00Z",
+        "datePublished": "2026-05-03T00:00:00.00Z",
+        "dateModified": "2026-05-03T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Richelmy Monteiro",
+            "url": "https://richmont.dev/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/richmont.dev\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/richmont.dev\/post\/drivers_fluig\/",
+        "wordCount" : "918",
+        "genre" : [ ],
+        "keywords" : [ ]
+    }
+  </script>
+
+
+
+
+  
+  
+  
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div class="sidebar">
+  <div
+    class="sidebar__content 
+      animated fadeInDown
+    "
+  >
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Site do Richelmy</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://de.linkedin.com/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fa-brands fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://github.com/richmont"
+            target="_blank"
+            rel="noopener me"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <i class="fa-brands fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul
+    class="footer__list 
+      animated fadeInDown
+    "
+  >
+    <li class="footer__item">
+      &copy;
+      
+        Richelmy Monteiro
+        2026
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9531b4a2217a70c5a1fce89c1f81c9ebbdd586708fcd4130b417320c7230c8d6.js"
+    integrity="sha256-lTG0oiF6cMWh/OicH4HJ673VhnCPzUEwtBcyDHIwyNY="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Página inicial</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Posts</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >Sobre</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contato</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      
+        <h1>Instalação De Drivers Do MariaDB E PostgreSQL No FLUIG</h1>
+      
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  3/5/2026
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">Tempo de leitura: 5 minutos</span>
+          </li>
+        </ul>
+      <p>FLUIG utiliza WildFly como servidor de aplicação JBoss, é nele que é instalado o datasource.<br>
+FLUIG já possui por padrão o suporte a MySQL, mas a conexão para bancos MariaDB é recomendado utilizar o driver JDBC próprio.<br>
+Adicionar novos datasources permite integrar a plataforma da TOTVS a aplicações e serviços adicionais, expandindo as possibilidades do que você pode construir com FLUIG.<br>
+As instruções abaixo não contam com suporte oficial da TOTVS e devem ser realizadas por sua conta em risco, em caso de dúvidas entre em contato com um consultor FLUIG de sua confiança.</p>
+<h1 id="requisitos">Requisitos</h1>
+<p>Instalação baseada no princípio que você utiliza o FLUIG 1.8 em um servidor Linux, pode ser adaptado facilmente para instalações do FLUIG 2.0 e em servidores Windows, mas não será abordado neste contexto.<br>
+Você deve saber utilizar linha de comandos, mas procedimento pode ser realizado via interface gráfica também.</p>
+<h1 id="baixando-o-driver-e-instalando-o-módulo">Baixando o driver e instalando o módulo</h1>
+<p>Entre no diretório de módulos do Wildfly, como o FLUIG está instalado em <em><code>/opt/fluig</code></em> ( também conhecido como a variável de ambiente <code>WILDFLY_HOME</code>), o caminho
+completo é este:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/opt/fluig/
+</span></span></code></pre></div><p>O diretório de módulos, onde ficam localizados os pacotes de biblioteca java, será este aqui:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/opt/fluig/appserver/modules/
+</span></span></code></pre></div><p>Nele você encontrará estruturas de pastas referentes ao endereço de cada biblioteca.</p>
+<h2 id="módulo-do-mariadb">Módulo do MariaDB</h2>
+<p>Crie a estrutura de pastas a seguir:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/opt/fluig/appserver/modules/org/mariadb/jdbc/main
+</span></span></code></pre></div><p>Precisa baixar o conector e criar o arquivo modules.xml.</p>
+<p>O driver está disponível para download no site do próprio MariaDB:<br>
+<a href="https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j">https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j</a><br>
+A versão mais atual hoje é a 3.5.8<br>
+Prefiro pegar a URL direta do pacote e baixar no sistema do que copiar depois, então:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://dlm.mariadb.com/4639714/Connectors/java/connector-java-3.5.8/mariadb-java-client-3.5.8.jar -O /opt/fluig/appserver/modules/org/mariadb/jdbc/main
+</span></span></code></pre></div><p>Crie o arquivo de módulo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vi /opt/fluig/appserver/modules/org/mariadb/jdbc/main/module.xml
+</span></span></code></pre></div><p>Conteúdo do arquivo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;module</span> <span class="na">xmlns=</span><span class="s">&#34;urn:jboss:module:1.3&#34;</span> <span class="na">name=</span><span class="s">&#34;org.mariadb&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;resources&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;resource-root</span> <span class="na">path=</span><span class="s">&#34;mariadb-java-client-3.5.8.jar&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/resources&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&#34;javax.api&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&#34;javax.transaction.api&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependencies&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/module&gt;</span>
+</span></span></code></pre></div><p>O que o arquivo diz?<br>
+Que o módulo chamado <code>org.mariadb</code> chamará o recurso <code>mariadb-java-client-3.5.8.jar</code> que possui dependência nos módulos <code>javax.api</code> e <code>javax.transaction.api</code>.</p>
+<h1 id="módulo-do-postgresql">Módulo do PostgreSQL</h1>
+<p>Caminho do módulo, crie os diretórios nesta estrutura:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/opt/fluig/appserver/modules/org/postgresql/main
+</span></span></code></pre></div><p>Driver disponível no site:<br>
+<a href="https://jdbc.postgresql.org/">https://jdbc.postgresql.org/</a></p>
+<p>A versão mais atual e compatível com Java 11 e superiores é a 42.7.11 no momento.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://jdbc.postgresql.org/download/postgresql-42.7.11.jar -O /opt/fluig/appserver/modules/org/postgresql/main
+</span></span></code></pre></div><p>Crie o arquivo de módulo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vi /opt/fluig/appserver/modules/org/postgresql/main/module.xml
+</span></span></code></pre></div><p>Conteúdo:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;module</span> <span class="na">xmlns=</span><span class="s">&#34;urn:jboss:module:1.3&#34;</span> <span class="na">name=</span><span class="s">&#34;org.postgresql&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;resources&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;resource-root</span> <span class="na">path=</span><span class="s">&#34;postgresql-42.7.11.jar&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/resources&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;dependencies&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&#34;javax.api&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&#34;javax.transaction.api&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/dependencies&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/module&gt;</span>
+</span></span></code></pre></div><h1 id="criando-datasources">Criando datasources</h1>
+<p>Se você utiliza o FLUIG versão 1.8, precisará editar o arquivo <code>domain.xml</code>, caso use 2.0, será o <code>standalone.xml</code>.<br>
+Procure pelas tags <code>&lt;datasources&gt;</code>, dentro delas inclua as tags a seguir, conforme sua conexão com o banco de dados:</p>
+<h2 id="mariadb">MariaDB</h2>
+<p>Datasource simples, adequado para foco em performance e quando se acessa apenas um recurso. É o modo de conexão padrão. Sim, a classe que valida a conexão é a mesma do MySQL, não tem problema.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">    <span class="nt">&lt;datasource</span> <span class="na">enabled=</span><span class="s">&#34;true&#34;</span> <span class="na">jndi-name=</span><span class="s">&#34;java:/jdbc/MariadbDS&#34;</span> <span class="na">jta=</span><span class="s">&#34;true&#34;</span> <span class="na">pool-name=</span><span class="s">&#34;MariadbDS&#34;</span> <span class="na">statistics-enabled=</span><span class="s">&#34;true&#34;</span> <span class="na">use-java-context=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;connection-url&gt;</span>jdbc:mariadb://127.0.0.1:3306/banco<span class="nt">&lt;/connection-url&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;driver&gt;</span>mariadbDriver<span class="nt">&lt;/driver&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;pool&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;min-pool-size&gt;</span>5<span class="nt">&lt;/min-pool-size&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;max-pool-size&gt;</span>65<span class="nt">&lt;/max-pool-size&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/pool&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;security&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;user-name&gt;</span>usuario<span class="nt">&lt;/user-name&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;password&gt;</span>senha<span class="nt">&lt;/password&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/security&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;validation&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;valid-connection-checker</span> <span class="na">class-name=</span><span class="s">&#34;org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;validate-on-match&gt;</span>true<span class="nt">&lt;/validate-on-match&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;background-validation&gt;</span>false<span class="nt">&lt;/background-validation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/validation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;timeout&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;blocking-timeout-millis&gt;</span>30000<span class="nt">&lt;/blocking-timeout-millis&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/timeout&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;statement&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;share-prepared-statements&gt;</span>false<span class="nt">&lt;/share-prepared-statements&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/statement&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/datasource&gt;</span>
+</span></span></code></pre></div><p>Datasource XA, utiliza recursos de integridade do JDBC, apropriado quando se acessam múltiplos recursos (bancos de dados mensagens JMS, etc) e é preciso que cada transação nesses recursos seja atômica, caso um falhe, todos falham. Não vou entrar em detalhes sobre a distinção, mas é bom saber como configurar as duas formas.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">    <span class="nt">&lt;xa-datasource</span> <span class="na">jndi-name=</span><span class="s">&#34;java:/jdbc/MariaDBXADS&#34;</span> <span class="na">pool-name=</span><span class="s">&#34;MariaDBXADS&#34;</span> <span class="na">tracking=</span><span class="s">&#34;true&#34;</span> <span class="na">statistics-enabled=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;user&#34;</span><span class="nt">&gt;</span>usuario<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;password&#34;</span><span class="nt">&gt;</span>senha<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;url&#34;</span><span class="nt">&gt;</span>jdbc:mariadb://127.0.0.1:3306/banco<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;driver&gt;</span>mariadbDriver<span class="nt">&lt;/driver&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;validation&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;valid-connection-checker</span> <span class="na">class-name=</span><span class="s">&#34;org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;check-valid-connection-sql&gt;</span>select 1;<span class="nt">&lt;/check-valid-connection-sql&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;validate-on-match&gt;</span>true<span class="nt">&lt;/validate-on-match&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;background-validation&gt;</span>true<span class="nt">&lt;/background-validation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/validation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;statement&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;share-prepared-statements&gt;</span>true<span class="nt">&lt;/share-prepared-statements&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/statement&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/xa-datasource&gt;</span>
+</span></span></code></pre></div><p>É possível configurar o driver dentro de cada datasource, mas é mais fácil usar um nodo próprio que é usado por ambos. Ainda dentro da tag <code>&lt;datasources&gt;</code> insira a de driver.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">    <span class="nt">&lt;driver</span> <span class="na">name=</span><span class="s">&#34;mariadbDriver&#34;</span> <span class="na">module=</span><span class="s">&#34;org.mariadb&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;driver-class&gt;</span>org.mariadb.jdbc.Driver<span class="nt">&lt;/driver-class&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;xa-datasource-class&gt;</span>org.mariadb.jdbc.MariaDbPoolDataSource<span class="nt">&lt;/xa-datasource-class&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!--&lt;datasource-class&gt;org.mariadb.jdbc.MariaDbPoolDataSource&lt;/datasource-class&gt;--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/driver&gt;</span>
+</span></span></code></pre></div><p>A tag com datasource-class está comentada devido a eu ter tido dificuldades de conectar o datasource simples a ela, já a xa-datasource-class é necessária para conexão do XA.<br>
+O nome do driver deve ser o mesmo do datasource, nesse caso, mariadbDriver.</p>
+<h2 id="postgresql">PostgreSQL</h2>
+<p>Datasource simples</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">    <span class="nt">&lt;datasource</span> <span class="na">jndi-name=</span><span class="s">&#34;java:/jdbc/PostgreSQLDS&#34;</span> <span class="na">pool-name=</span><span class="s">&#34;PostgreSQLDS&#34;</span> <span class="na">statistics-enabled=</span><span class="s">&#34;true&#34;</span> <span class="na">jta=</span><span class="s">&#34;true&#34;</span> <span class="na">use-java-context=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;connection-property</span> <span class="na">name=</span><span class="s">&#34;serverName&#34;</span><span class="nt">&gt;</span>127.0.0.1<span class="nt">&lt;/connection-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;connection-property</span> <span class="na">name=</span><span class="s">&#34;databaseName&#34;</span><span class="nt">&gt;</span>banco<span class="nt">&lt;/connection-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;connection-property</span> <span class="na">name=</span><span class="s">&#34;portNumber&#34;</span><span class="nt">&gt;</span>5432<span class="nt">&lt;/connection-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;connection-property</span> <span class="na">name=</span><span class="s">&#34;user&#34;</span><span class="nt">&gt;</span>usuario<span class="nt">&lt;/connection-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;connection-property</span> <span class="na">name=</span><span class="s">&#34;password&#34;</span><span class="nt">&gt;</span>senha<span class="nt">&lt;/connection-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;driver&gt;</span>postgresqlDriver<span class="nt">&lt;/driver&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;validation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;valid-connection-checker</span> <span class="na">class-name=</span><span class="s">&#34;org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;check-valid-connection-sql&gt;</span>select 1<span class="nt">&lt;/check-valid-connection-sql&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;validate-on-match&gt;</span>true<span class="nt">&lt;/validate-on-match&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;background-validation&gt;</span>true<span class="nt">&lt;/background-validation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/validation&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/datasource&gt;</span>
+</span></span></code></pre></div><p>Datasource XA</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">    <span class="nt">&lt;xa-datasource</span> <span class="na">jndi-name=</span><span class="s">&#34;java:/jdbc/PostgreSQLXADS&#34;</span> <span class="na">pool-name=</span><span class="s">&#34;PostgreSQLXADS&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="na">statistics-enabled=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;serverName&#34;</span><span class="nt">&gt;</span>127.0.0.1<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;databaseName&#34;</span><span class="nt">&gt;</span>banco<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;portNumber&#34;</span><span class="nt">&gt;</span>5432<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;user&#34;</span><span class="nt">&gt;</span>usuario<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;xa-datasource-property</span> <span class="na">name=</span><span class="s">&#34;password&#34;</span><span class="nt">&gt;</span>senha<span class="nt">&lt;/xa-datasource-property&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;driver&gt;</span>postgresqlDriver<span class="nt">&lt;/driver&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;validation&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;valid-connection-checker</span> <span class="na">class-name=</span><span class="s">&#34;org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;check-valid-connection-sql&gt;</span>select 1<span class="nt">&lt;/check-valid-connection-sql&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;validate-on-match&gt;</span>true<span class="nt">&lt;/validate-on-match&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;background-validation&gt;</span>true<span class="nt">&lt;/background-validation&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/validation&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/xa-datasource&gt;</span>
+</span></span></code></pre></div><p>E a configuração do driver:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;driver</span> <span class="na">name=</span><span class="s">&#34;postgresqlDriver&#34;</span> <span class="na">module=</span><span class="s">&#34;org.postgresql&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;driver-class&gt;</span>org.postgresql.Driver<span class="nt">&lt;/driver-class&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;xa-datasource-class&gt;</span>org.postgresql.xa.PGXADataSource<span class="nt">&lt;/xa-datasource-class&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;datasource-class&gt;</span>org.postgresql.ds.PGPoolingDataSource<span class="nt">&lt;/datasource-class&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/driver&gt;</span>
+</span></span></code></pre></div><p>Reinicie o serviço do FLUIG e teste com um dataset como este:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">createDataset</span><span class="p">(</span><span class="nx">fields</span><span class="p">,</span> <span class="nx">constraints</span><span class="p">,</span> <span class="nx">sortFields</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">newDataset</span> <span class="o">=</span> <span class="nx">DatasetBuilder</span><span class="p">.</span><span class="nx">newDataset</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">	if(fields == null){
+</span></span></span><span class="line"><span class="cl"><span class="cm">		newDataset.addColumn(&#34;INFO&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="cm">		newDataset.addRow(new Array(&#34;Informe uma query!&#34;));
+</span></span></span><span class="line"><span class="cl"><span class="cm">		return newDataset;
+</span></span></span><span class="line"><span class="cl"><span class="cm">	}
+</span></span></span><span class="line"><span class="cl"><span class="cm">	var minhaQuery = fields[0];
+</span></span></span><span class="line"><span class="cl"><span class="cm">	*/</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">minhaQuery</span> <span class="o">=</span> <span class="s2">&#34;select * from usuarios limit 10;&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s2">&#34;****** start - [ds_sql_mariadb] QUERY: &#34;</span> <span class="o">+</span> <span class="nx">minhaQuery</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">dataSource</span> <span class="o">=</span> <span class="s2">&#34;java:/jdbc/MariadbDS&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">stmt</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">rs</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">ic</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">javax</span><span class="p">.</span><span class="nx">naming</span><span class="p">.</span><span class="nx">InitialContext</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">ds</span> <span class="o">=</span> <span class="nx">ic</span><span class="p">.</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">dataSource</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">created</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">try</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">conn</span> <span class="o">=</span> <span class="nx">ds</span><span class="p">.</span><span class="nx">getConnection</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">stmt</span> <span class="o">=</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">createStatement</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="c1">// Sets the number of seconds the driver will wait for
+</span></span></span><span class="line"><span class="cl">		<span class="c1">// a statement object to execute to the given number of
+</span></span></span><span class="line"><span class="cl">		<span class="c1">// seconds. If the limit is exceeded, an SQLException
+</span></span></span><span class="line"><span class="cl">		<span class="c1">// is thrown.
+</span></span></span><span class="line"><span class="cl">		<span class="nx">stmt</span><span class="p">.</span><span class="nx">setQueryTimeout</span><span class="p">(</span><span class="mi">1800</span><span class="p">);</span> <span class="c1">//30 minutos = 1800 segundos
+</span></span></span><span class="line"><span class="cl">		<span class="nx">rs</span> <span class="o">=</span> <span class="nx">stmt</span><span class="p">.</span><span class="nx">executeQuery</span><span class="p">(</span><span class="nx">minhaQuery</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">var</span> <span class="nx">columnCount</span> <span class="o">=</span> <span class="nx">rs</span><span class="p">.</span><span class="nx">getMetaData</span><span class="p">().</span><span class="nx">getColumnCount</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span><span class="p">(</span><span class="nx">rs</span><span class="p">.</span><span class="nx">next</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">created</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;=</span><span class="nx">columnCount</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">newDataset</span><span class="p">.</span><span class="nx">addColumn</span><span class="p">(</span><span class="nx">rs</span><span class="p">.</span><span class="nx">getMetaData</span><span class="p">().</span><span class="nx">getColumnName</span><span class="p">(</span><span class="nx">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">created</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="kd">var</span> <span class="nx">Arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;=</span><span class="nx">columnCount</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">rs</span><span class="p">.</span><span class="nx">getObject</span><span class="p">(</span><span class="nx">rs</span><span class="p">.</span><span class="nx">getMetaData</span><span class="p">().</span><span class="nx">getColumnName</span><span class="p">(</span><span class="nx">i</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span><span class="p">(</span><span class="kc">null</span><span class="o">!=</span><span class="nx">obj</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">Arr</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">rs</span><span class="p">.</span><span class="nx">getObject</span><span class="p">(</span><span class="nx">rs</span><span class="p">.</span><span class="nx">getMetaData</span><span class="p">().</span><span class="nx">getColumnName</span><span class="p">(</span><span class="nx">i</span><span class="p">)).</span><span class="nx">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">				<span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">Arr</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;null&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">newDataset</span><span class="p">.</span><span class="nx">addRow</span><span class="p">(</span><span class="nx">Arr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">newDataset</span><span class="p">.</span><span class="nx">addRow</span><span class="p">(</span><span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&#34;ERRO==============&gt; &#34;</span> <span class="o">+</span> <span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span><span class="k">finally</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">try</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="nx">rs</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="nx">rs</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="nx">stmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="nx">stmt</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="nx">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="nx">conn</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">er</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">newDataset</span><span class="p">.</span><span class="nx">addRow</span><span class="p">(</span><span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">er</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">log</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&#34;Erro ao fechar as conexões: &#34;</span> <span class="o">+</span> <span class="nx">er</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">newDataset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div>
+</div>
+    <div class="post__footer">
+      
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul
+    class="footer__list 
+      animated fadeInDown
+    "
+  >
+    <li class="footer__item">
+      &copy;
+      
+        Richelmy Monteiro
+        2026
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9531b4a2217a70c5a1fce89c1f81c9ebbdd586708fcd4130b417320c7230c8d6.js"
+    integrity="sha256-lTG0oiF6cMWh/OicH4HJ673VhnCPzUEwtBcyDHIwyNY="
+    crossorigin="anonymous"
+  ></script></body>
+</html>

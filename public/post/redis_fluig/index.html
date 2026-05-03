@@ -1,0 +1,515 @@
+<!doctype html>
+<html
+  dir="ltr"
+  lang="pt-br"
+  data-theme=""
+  
+    class="html theme--light"
+  
+><head>
+  <meta charset="utf-8" /><title>
+    
+      
+        Como utilizar Redis no FLUIG |
+      Richelmy Monteiro
+
+  </title>
+
+  <meta name="generator" content="Hugo 0.161.1"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="author" content="Richelmy Monteiro" />
+  <meta
+    name="description"
+    content="Chamar funções do Redis para usar de cache nas suas aplicações FLUIG"
+  />
+  
+  
+        <link rel="stylesheet" href="/css/anatole.min.d1a2db4db62630dc690a91ef034ed2fbecab93af4a610b9b8966d9f96705289c.css" integrity="sha256-0aLbTbYmMNxpCpHvA07S&#43;&#43;yrk69KYQubiWbZ&#43;WcFKJw=" crossorigin="anonymous" />
+      
+  <link
+    rel="stylesheet"
+    href="/css/markupHighlight.min.f8ba48d3fd92c731701d9634494275b2f2bc2ad0bea19b438feb41b25052f83b.css"
+    integrity="sha256-&#43;LpI0/2SxzFwHZY0SUJ1svK8KtC&#43;oZtDj&#43;tBslBS&#43;Ds="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/fontawesome.min.137b1cf3cea9a8adb7884343a9a5ddddf4280f59153f74dc782fb7f7bf0d0519.css"
+    integrity="sha256-E3sc886pqK23iENDqaXd3fQoD1kVP3TceC&#43;3978NBRk="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/solid.min.e65dc5b48fb5f39b142360c57c3a215744c94e56c755c929cc3e88fe12aab4d3.css"
+    integrity="sha256-5l3FtI&#43;185sUI2DFfDohV0TJTlbHVckpzD6I/hKqtNM="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/regular.min.6f4f16d58da1c82c0c3a3436e021a3d39b4742f741192c546e73e947eacfd92f.css"
+    integrity="sha256-b08W1Y2hyCwMOjQ24CGj05tHQvdBGSxUbnPpR&#43;rP2S8="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link
+    rel="stylesheet"
+    href="/fontawesome/css/brands.min.e10425ad768bc98ff1fb272a0ac8420f9d1ba22f0612c08ff1010c95080ffe7e.css"
+    integrity="sha256-4QQlrXaLyY/x&#43;ycqCshCD50boi8GEsCP8QEMlQgP/n4="
+    crossorigin="anonymous"
+    type="text/css"
+  />
+  
+  <link rel="shortcut icon" href="/favicons/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+
+  <link rel="canonical" href="https://richmont.dev/post/redis_fluig/" />
+  
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/anatole-header.min.f9132794301a01ff16550ed66763482bd848f62243d278f5e550229a158bfd32.js"
+    integrity="sha256-&#43;RMnlDAaAf8WVQ7WZ2NIK9hI9iJD0nj15VAimhWL/TI="
+    crossorigin="anonymous"
+  ></script>
+
+  
+    
+    
+    <script
+      type="text/javascript"
+      src="/js/anatole-theme-switcher.min.8724ddf9268dee451060f191961647573c7f592fbccc6d858746236b3f915813.js"
+      integrity="sha256-hyTd&#43;SaN7kUQYPGRlhZHVzx/WS&#43;8zG2Fh0Yjaz&#43;RWBM="
+      crossorigin="anonymous"
+    ></script>
+  
+
+  
+
+  
+
+  
+
+
+  
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Como utilizar Redis no FLUIG">
+  <meta name="twitter:description" content="Chamar funções do Redis para usar de cache nas suas aplicações FLUIG">
+
+
+
+  
+  <meta property="og:url" content="https://richmont.dev/post/redis_fluig/">
+  <meta property="og:site_name" content="Site do Richelmy">
+  <meta property="og:title" content="Como utilizar Redis no FLUIG">
+  <meta property="og:description" content="Chamar funções do Redis para usar de cache nas suas aplicações FLUIG">
+  <meta property="og:locale" content="pt_br">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2026-05-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-05-03T00:00:00+00:00">
+
+
+
+  
+  
+  <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "articleSection": "post",
+        "name": "Como utilizar Redis no FLUIG",
+        "headline": "Como utilizar Redis no FLUIG",
+        "alternativeHeadline": "",
+        "description": "
+      Chamar funções do Redis para usar de cache nas suas aplicações FLUIG
+
+
+    ",
+        "license": "",
+        
+        "inLanguage": "pt-br",
+        "isFamilyFriendly": "true",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/richmont.dev\/post\/redis_fluig\/"
+        },
+        "author" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "creator" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "accountablePerson" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "copyrightHolder" : {
+            "@type": "Person",
+            "name": "Richelmy Monteiro"
+        },
+        "dateCreated": "2026-05-03T00:00:00.00Z",
+        "datePublished": "2026-05-03T00:00:00.00Z",
+        "dateModified": "2026-05-03T00:00:00.00Z",
+        "publisher":{
+            "@type":"Organization",
+            "name": "Richelmy Monteiro",
+            "url": "https://richmont.dev/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/richmont.dev\/favicons\/favicon-32x32.png",
+                "width":"32",
+                "height":"32"
+            }
+        },
+        "image": 
+      [
+      ]
+
+    ,
+        "url" : "https:\/\/richmont.dev\/post\/redis_fluig\/",
+        "wordCount" : "677",
+        "genre" : [ ],
+        "keywords" : [ ]
+    }
+  </script>
+
+
+
+
+  
+  
+  
+</head>
+<body class="body">
+    <div class="wrapper">
+      <aside
+        
+          class="wrapper__sidebar"
+        
+      ><div class="sidebar">
+  <div
+    class="sidebar__content 
+      animated fadeInDown
+    "
+  >
+    <div class="sidebar__introduction">
+      <img
+        class="sidebar__introduction-profileimage"
+        src="/"
+        alt="profile picture"
+      />
+      
+        <div class="sidebar__introduction-title">
+          <a href="/">Site do Richelmy</a>
+        </div>
+      
+      <div class="sidebar__introduction-description">
+        <p></p>
+      </div>
+    </div>
+    <ul class="sidebar__list">
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://de.linkedin.com/"
+            target="_blank"
+            rel="noopener me"
+            aria-label="Linkedin"
+            title="Linkedin"
+          >
+            <i class="fa-brands fa-linkedin fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+        <li class="sidebar__list-item">
+          <a
+            href="https://github.com/richmont"
+            target="_blank"
+            rel="noopener me"
+            aria-label="GitHub"
+            title="GitHub"
+          >
+            <i class="fa-brands fa-github fa-2x" aria-hidden="true"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div><footer class="footer footer__sidebar">
+  <ul
+    class="footer__list 
+      animated fadeInDown
+    "
+  >
+    <li class="footer__item">
+      &copy;
+      
+        Richelmy Monteiro
+        2026
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9531b4a2217a70c5a1fce89c1f81c9ebbdd586708fcd4130b417320c7230c8d6.js"
+    integrity="sha256-lTG0oiF6cMWh/OicH4HJ673VhnCPzUEwtBcyDHIwyNY="
+    crossorigin="anonymous"
+  ></script></div>
+</aside>
+      <main
+        
+          class="wrapper__main"
+        
+      >
+        <header class="header"><div
+  class="
+    animated fadeInDown
+  "
+>
+  <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+    <span aria-hidden="true" class="navbar-burger__line"></span>
+  </a>
+  <nav class="nav">
+    <ul class="nav__list" id="navMenu">
+      
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/"
+              
+              title=""
+              >Página inicial</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/post/"
+              
+              title=""
+              >Posts</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/about/"
+              
+              title=""
+              >Sobre</a
+            >
+          </li>
+        
+
+      
+        
+        
+          <li class="nav__list-item">
+            
+            <a
+              
+              href="/contact/"
+              
+              title=""
+              >Contato</a
+            >
+          </li>
+        
+
+      
+    </ul>
+    <ul class="nav__list nav__list--end">
+      
+      
+        <li class="nav__list-item">
+          <div class="themeswitch">
+            <a title="Switch Theme">
+              <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a>
+          </div>
+        </li>
+      
+    </ul>
+  </nav>
+</div>
+</header>
+  <div
+    class="post 
+      animated fadeInDown
+    "
+  >
+    
+    <div class="post__content">
+      
+        <h1>Como Utilizar Redis No FLUIG</h1>
+      
+      
+        <ul class="post__meta">
+          <li class="post__meta-item">
+            <em class="fas fa-calendar-day post__meta-icon"></em>
+            <span class="post__meta-text"
+              >
+                
+                  3/5/2026
+                
+
+              
+            </span>
+          </li>
+          <li class="post__meta-item">
+            <em class="fas fa-stopwatch post__meta-icon"></em>
+            <span class="post__meta-text">Tempo de leitura: 4 minutos</span>
+          </li>
+        </ul>
+      <p>As instruções abaixo não contam com suporte oficial da TOTVS e devem ser realizadas por sua conta em risco, em caso de dúvidas entre em contato com um consultor FLUIG de sua confiança.</p>
+<p>Redis é utilizado em larga escapa com aplicações distribuídas na web, servindo de cache em memória RAM para retornar rapidamente informações consultadas com frequência.<br>
+Integrá-lo a seu servidor do FLUIG pode trazer os benefícios:</p>
+<ul>
+<li>Ganho de performance</li>
+<li>Reduzir a quantidade de chamadas de API de terceiros ou ao ERP do cliente</li>
+</ul>
+<h1 id="caso-de-uso">Caso de uso</h1>
+<p>Um programa que recebe o número do CPF e verifica no ERP se este usuário já está cadastrado.<br>
+Cenário atual:<br>
+Cada consulta no banco de dados do ERP leva 5 segundos, é um programa legado e está fora do seu alcance alterar o funcionamento dele, seja mudando as queries SQL, incluir índices ou fazer outro tipo de otimização.<br>
+Um usuário que necessita constantemente verificar se o CPF está cadastrado vai levar o tempo para digitar os números mais o tempo de consulta, repetidamente, todos os dias. Não vou entrar no mérito de considerar o tempo perdido pelo usuário diariamente apenas esperando o sistema retornar se o CPF existe ou não, mas que melhoras de performance tornariam o sistema mais amigável.</p>
+<h2 id="servidor-compatível-com-redis">Servidor compatível com Redis</h2>
+<p>Você pode utilizar o próprio redis-server ou a alternativa comunitária valkey-server. Valkey está disponível via repositório EPEL no Oracle Linux 10 ou via repositório security do Debian 13. Valkey foi criado como um fork após a companhia responsável pelo Redis alterar a licença de código aberto para uma licença não aberta, é um substituto transparente ao Redis, sem necessitar adaptações adicionais.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt install valkey-server
+</span></span></code></pre></div><p>Habilite e inicie o serviço systemd</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl <span class="nb">enable</span> valkey-server <span class="o">&amp;&amp;</span> systemctl start valkey-server
+</span></span></code></pre></div><p>O servidor começará a escutar por padrão na porta 6379 da interface loopback (127.0.0.1 em ipv4), recomendo fortemente que o servidor valkey seja executado no mesmo servidor do FLUIG.</p>
+<h2 id="extração-de-dados">Extração de dados</h2>
+<p>Periodicamente são consultados todos os CPFs no ERP e armazenados no servidor valkey, convém que o ERP possua registro de quando um determinado CPF foi cadastrado, para que a extração consulte apenas a partir da última data consumida, sem puxar a base toda.<br>
+O processo de extração não depende do FLUIG em si, poderia ser feito por um script python ou no ERP em si. Vou presumir que todos os CPFs cadastrados no momento estejam disponíveis no servidor valkey.</p>
+<h2 id="chamada-dos-dados-do-fluig">Chamada dos dados do FLUIG</h2>
+<p>Jedis, a biblioteca do Java para consultar a API do Redis, já está pré-instalada no FLUIG por padrão, então não é preciso baixar e alterar os módulos da aplicação, apenas usar.</p>
+<p>Exemplo de como o dataset de busca de CPF poderia ser:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">defineStructure</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">onSync</span><span class="p">(</span><span class="nx">lastSyncDate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">createDataset</span><span class="p">(</span><span class="nx">fields</span><span class="p">,</span> <span class="nx">constraints</span><span class="p">,</span> <span class="nx">sortFields</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">newDataset</span> <span class="o">=</span> <span class="nx">DatasetBuilder</span><span class="p">.</span><span class="nx">newDataset</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">newDataset</span><span class="p">.</span><span class="nx">addColumn</span><span class="p">(</span><span class="s2">&#34;STATUS&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">newDataset</span><span class="p">.</span><span class="nx">addColumn</span><span class="p">(</span><span class="s2">&#34;VALOR&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Chamada ao módulo do Jedis usando caminho completo
+</span></span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">Jedis</span> <span class="o">=</span> <span class="nb">Packages</span><span class="p">.</span><span class="nx">redis</span><span class="p">.</span><span class="nx">clients</span><span class="p">.</span><span class="nx">jedis</span><span class="p">.</span><span class="nx">Jedis</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Conexão no servidor local na porta padrão
+</span></span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">jedis</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Jedis</span><span class="p">(</span><span class="s2">&#34;localhost&#34;</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nx">constraints</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">fieldName</span> <span class="o">==</span> <span class="s1">&#39;CONSULTA_CPF&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">constraints</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">initialValue</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">str_cpf</span> <span class="o">=</span> <span class="nx">constraints</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">initialValue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">validaCPF</span><span class="p">(</span><span class="nx">str_cpf</span><span class="p">)</span> <span class="c1">// Código de validação ausente por ser apenas um exemplo
+</span></span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nx">r</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">id</span> <span class="o">=</span> <span class="nx">jedis</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;cpf: &#34;</span><span class="o">+</span><span class="nx">str_cpf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="nx">id</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">newDataset</span><span class="p">.</span><span class="nx">addRow</span><span class="p">(</span><span class="nb">Array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                        <span class="mi">0</span><span class="p">,</span> <span class="c1">// Não houve erro
+</span></span></span><span class="line"><span class="cl">                        <span class="nx">id</span> <span class="c1">// Retorna o ID do cliente cadastrado, pode ser recebido pela aplicação apenas para informar que já existe ou buscar detalhes baseado no ID de usuário.
+</span></span></span><span class="line"><span class="cl">                    <span class="p">));</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nx">newDataset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">                     * Código para verificar se o CPF existe no ERP
+</span></span></span><span class="line"><span class="cl"><span class="cm">                     * Necessário caso a extração esteja atrasada em relação aos dados da base
+</span></span></span><span class="line"><span class="cl"><span class="cm">                     * e garantir que haja retorno a aplicação mesmo caso o cache falhe
+</span></span></span><span class="line"><span class="cl"><span class="cm">                     */</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="nx">newDataset</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">newDataset</span><span class="p">.</span><span class="nx">addRow</span><span class="p">(</span><span class="nb">Array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                    <span class="mi">1</span><span class="p">,</span> <span class="c1">// Valor recebido não é um CPF
+</span></span></span><span class="line"><span class="cl">                    <span class="s2">&#34;ds_cpf: CPF não possui formato válido &#34;</span> <span class="o">+</span> <span class="nx">str_cpf</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nx">newDataset</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">newDataset</span><span class="p">.</span><span class="nx">addRow</span><span class="p">(</span><span class="nb">Array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="mi">1</span><span class="p">,</span> <span class="c1">// Erro de constraints
+</span></span></span><span class="line"><span class="cl">                <span class="s2">&#34;Verifique as constraints usadas para chamar este dataset&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">newDataset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="nx">except</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Exceção encontrada, possivelmente ao tentar conectar no servidor
+</span></span></span><span class="line"><span class="cl">        <span class="nx">newDataset</span><span class="p">.</span><span class="nx">addRow</span><span class="p">(</span><span class="nb">Array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">2</span><span class="p">,</span><span class="c1">// status de erro
+</span></span></span><span class="line"><span class="cl">            <span class="s2">&#34;Consulta ao dataset do Redis falhou: &#34;</span><span class="o">+</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span>
+</span></span><span class="line"><span class="cl">        <span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">newDataset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">onMobileSync</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
+</div>
+    <div class="post__footer">
+      
+
+      
+    </div>
+
+    
+  </div>
+
+      </main>
+    </div><footer class="footer footer__base">
+  <ul
+    class="footer__list 
+      animated fadeInDown
+    "
+  >
+    <li class="footer__item">
+      &copy;
+      
+        Richelmy Monteiro
+        2026
+      
+    </li>
+    
+  </ul>
+</footer>
+  
+  <script
+    type="text/javascript"
+    src="/js/medium-zoom.min.9531b4a2217a70c5a1fce89c1f81c9ebbdd586708fcd4130b417320c7230c8d6.js"
+    integrity="sha256-lTG0oiF6cMWh/OicH4HJ673VhnCPzUEwtBcyDHIwyNY="
+    crossorigin="anonymous"
+  ></script></body>
+</html>
